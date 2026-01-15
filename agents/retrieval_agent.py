@@ -52,10 +52,12 @@ class RetrievalAgent:
             print(f"❌ {self.name}: Vector store not initialized")
             return []
 
-        print(f"🔍 {self.name}: Searching for: '{query}'")
+        print(
+            f"🔍 {self.name}: Performing Hybrid Search (Dense + Sparse + Reranking) for: '{query}'"
+        )
 
-        # Perform semantic search
-        results = self.vector_store.search(query, top_k=top_k)
+        # Perform hybrid search with reranking
+        results = self.vector_store.search(query, top_k=top_k, use_reranker=True)
 
         # Format results for MCP message
         retrieved_chunks = []

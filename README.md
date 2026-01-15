@@ -1,14 +1,14 @@
 # 🤖 Agentic RAG Chatbot for Multi-Format Document QA
 
-An intelligent chatbot system built with an agentic architecture that can process multiple document formats and answer questions using Retrieval-Augmented Generation (RAG) with Model Context Protocol (MCP) for inter-agent communication.
+An intelligent chatbot system built with an **Advanced Agentic Architecture** that delivers State-of-the-Art (SOTA) performance using **Hybrid Search (Dense + Sparse)** and **Cross-Encoder Reranking**. It processes multiple document formats and answers questions using Retrieval-Augmented Generation (RAG) with Model Context Protocol (MCP) for seamless inter-agent communication.
 
 
 ## 🏗️ Architecture Overview
 
 This system implements a multi-agent architecture with three specialized agents:
 
-- **IngestionAgent**: Parses and preprocesses documents across multiple formats
-- **RetrievalAgent**: Handles embedding generation and semantic retrieval using FAISS
+- **IngestionAgent**: Parses and preprocesses documents across multiple formats (PDF, DOCX, PPTX, CSV, etc.)
+- **RetrievalAgent**: Executes **Hybrid Search** combining FAISS (Vector) and BM25 (Keyword), followed by **Cross-Encoder Reranking** for high-precision context.
 - **LLMResponseAgent**: Generates contextual responses using Google Gemini 2.0 Flash
 - **CoordinatorAgent**: Orchestrates the entire pipeline and manages agent interactions
 
@@ -67,11 +67,12 @@ agentic-rag-chatbot/
 - **Trace Tracking**: Complete observability with unique trace IDs
 - **Error Handling**: Robust error management across all agents
 
-### 🔍 Advanced Retrieval
-- **Semantic Search**: Using SentenceTransformers for embedding generation
-- **FAISS Vector Store**: High-performance similarity search
-- **Contextual Chunking**: Intelligent text segmentation with overlap
-- **Relevance Scoring**: Confidence scores for retrieved context
+### 🔍 Advanced RAG Engine (SOTA)
+- **Hybrid Search**: Combines the power of **Semantic Search** (Embeddings) and **Keyword Search** (BM25) to capture both conceptual understanding and precise filtering.
+- **Intelligent Reranking**: Uses a Cross-Encoder to re-score retrieved documents, ensuring the LLM receives only the most highly relevant context.
+- **FAISS Vector Store**: High-performance similarity search for dense vectors.
+- **Contextual Chunking**: Intelligent text segmentation with overlap for better context preservation.
+- **Traceability**: Relevance scores are calculated and displayed for every source document.
 
 ### 💬 Interactive Chat Interface
 - **Multi-turn Conversations**: Maintains chat history
@@ -159,8 +160,10 @@ User Query → CoordinatorAgent → RetrievalAgent → LLMResponseAgent → Resp
 
 - **Backend**: Python, Custom Agent Coordination
 - **LLM**: Google Gemini 2.0 Flash
-- **Vector Database**: FAISS
+- **Vector Database**: FAISS (Dense Retrieval)
+- **Keyword Search**: BM25Okapi (Sparse Retrieval)
 - **Embeddings**: SentenceTransformers (all-MiniLM-L6-v2)
+- **Reranking**: Cross-Encoder (ms-marco-MiniLM-L-6-v2)
 - **Frontend**: Streamlit
 - **Document Processing**: PyPDF2, python-pptx, python-docx, pandas
 - **Communication**: Custom MCP implementation

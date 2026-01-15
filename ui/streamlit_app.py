@@ -42,7 +42,10 @@ def display_sources(sources):
     """Display source information without nested expanders"""
     if sources:
         for i, source in enumerate(sources):
-            st.markdown(f"**Source {i + 1}:** `{source['filename']}`")
+            score_display = (
+                f" (Score: {source['score']:.3f})" if "score" in source else ""
+            )
+            st.markdown(f"**Source {i + 1}:** `{source['filename']}`{score_display}")
             st.markdown(f"> {source['preview']}")
             st.markdown("---")
 
@@ -161,8 +164,9 @@ def main():
            - Creates text chunks
         
         2. 🔍 **RetrievalAgent** 
-           - Builds vector store
-           - Performs semantic search
+           - **Hybrid Search** (Dense + BM25)
+           - **Reranking** (Cross-Encoder)
+           - Semantic Analysis
         
         3. 🤖 **LLMResponseAgent**
            - Uses Gemini 2.0 Flash or Hugging Face LLM
@@ -177,9 +181,10 @@ def main():
         st.header("ℹ️ System Info")
         st.json(
             {
-                "Model": "HuggingFace: flan-t5-base",
-                "Vector Store": "FAISS",
+                "Model": "Gemini 2.0 Flash",
+                "Vector Store": "FAISS + BM25",
                 "Embeddings": "SentenceTransformers",
+                "Reranker": "Cross-Encoder",
                 "Supported Formats": ["PDF", "PPTX", "DOCX", "CSV", "TXT", "MD"],
             }
         )
